@@ -55,15 +55,32 @@ california_housing_project/
    # الخلية 1: تثبيت المكتبات
    !pip install -q streamlit pyngrok plotly
 
-   # الخلية 2: ضبط ngrok token
-   import os
-   os.environ['NGROK_AUTHTOKEN'] = '3FghmjIhl8Oc4iIbV9Vre1J9HlH_6F5ykoVyfgacWCkGscjY9'
+   # الخلية 2: تحميل ملف run_colab_ngrok.py (إذا لم يكن موجوداً)
+   !wget https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/run_colab_ngrok.py -O run_colab_ngrok.py
 
-   # الخلية 3: تشغيل التطبيق
+   # الخلية 3: تشغيل التطبيق مباشرة
    !python run_colab_ngrok.py
    ```
 
 5. **انسخ الرابط**: بعد التشغيل، سيظهر رابط عام (Public URL) - انسخه وافتحه في المتصفح
+
+6. **طريقة بديلة باستخدام Colab magic**:
+   ```python
+   # يمكنك أيضاً استخدام هذه الطريقة المختصرة:
+   from pyngrok import ngrok
+   import subprocess, time
+   
+   # ضبط token
+   ngrok.set_auth_token('3FghmjIhl8Oc4iIbV9Vre1J9HlH_6F5ykoVyfgacWCkGscjY9')
+   
+   # تشغيل Streamlit
+   subprocess.Popen(['streamlit', 'run', 'app.py', '--server.port', '8501'])
+   time.sleep(5)
+   
+   # إنشاء النفق
+   tunnel = ngrok.connect(8501)
+   print(f'🔗 Open: {tunnel.public_url}')
+   ```
 
 ## أجزاء المشروع والتقييم
 
