@@ -1,4 +1,8 @@
-import os
+
+base = 'output/california_housing_project'
+
+# ==================== 6. app.py (Streamlit Dashboard - FULL) ====================
+app_py = '''import os
 import joblib
 import numpy as np
 import pandas as pd
@@ -235,3 +239,9 @@ elif section == "📋 Comparative Analysis":
     if scores is not None:
         st.markdown("**Clustering**")
         st.dataframe(scores.round(4), use_container_width=True)
+'''
+
+with open(f'{base}/app.py', 'w', encoding='utf-8') as f:
+    f.write(app_py)
+
+print("app.py created:", os.path.getsize(f'{base}/app.py'), "bytes")
